@@ -1,0 +1,65 @@
+<div class="container mt-5">
+  <!-- {{formgroup.value| json}} -->
+  <!-- <h3 (click)="sortData('name')">Nom</h3>
+  <h3 (click)="sortData('price')">Prix</h3>
+  <h3 (click)="sortData('category')">Catégorie</h3> -->
+   <button class="btn btn-primary" (click)="handleAdd()">Add</button>
+
+  <div class="input-group " >
+    <span class="input-group-text" id="basic-addon1">Products</span>
+    <input type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="basic-addon1" [(ngModel)]="searchText1">
+    <button class="btn btn-outline-primary" >chercher</button>
+  </div>
+
+  <div class="card" >
+    <div class="card-header text-center"> <h3>list products</h3></div>
+
+    <div class="card-body" style="background-color: rgb(206, 218, 206);">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"> name <span  (click)="sortData('name')" class="btn btn-link ">
+              <i class="bi-arrow-up-square-fill" ></i></span>
+            </th>
+
+            <th scope="col"> price <span  (click)="sortData('price')" class="btn btn-link ">
+              <i class="bi-arrow-up-square-fill" ></i></span>
+            </th>
+
+            <th scope="col">category <span (click)="sortData('category')" class="btn btn-link ">
+              <i class="bi-arrow-up-square-fill" ></i></span></th>
+            <th scope="col">stock</th>
+            <th scope="col">action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of products | filter:searchText1 | tri:sortField:sortOrder " [appHighlight]="p" >
+            <th scope="row">{{p.id}}</th>
+            <td>{{p.name}}</td>
+            <td>{{p.price | currency}}</td>
+            <td>{{p.category}}</td>
+            <td ><i [ngClass]=" p.stock ? 'bi bi-check-circle-fill text-success' : 'bi bi-x-circle-fill text-danger'"></i></td>
+            <td ><button  [ngClass]=" p.stock ? ' btn btn-danger' : 'btn btn-success'" (click)=" handleStock(p)">
+
+               <span *ngIf="p.stock==true">
+                stock of
+            </span>
+            <span *ngIf="p.stock==false">
+                stock on
+            </span>
+          </button>
+
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+

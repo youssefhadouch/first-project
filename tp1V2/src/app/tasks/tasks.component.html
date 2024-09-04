@@ -1,0 +1,39 @@
+<div class="container">
+  <form (ngSubmit)="add()">
+    <input type="text" [(ngModel)]="newDescriprion" name="newDescriprion">
+    <button type="submit" class="btn btn-primary" [disabled]="newDescriprion==''">add</button>
+  </form>
+</div>
+
+
+<div class="container d-flex justify-content-center align-items-center vh-100 mt-6">
+
+
+<table class="table">
+  <thead class="table-header">
+ <tr>
+  <th>id</th>
+  <th>descriprion</th>
+  <th>DateAjouter</th>
+  <th>completed</th>
+ </tr>
+  </thead >
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{task.id}}</td>
+      <td>{{task.description | uppercase}}</td>
+      <td>{{task.dateAjouter | date:'short' }}</td>
+    <td >
+      <button class="btn" [disabled]="task.completed" [ngClass]="task.completed? 'btn-danger':'btn-success'"
+      (click)="unCompleted(task)">{{task.completed ? 'termine' : 'terminer'}}</button>
+
+      <!-- <span *ngIf="task.completed" class=" text-success">termine</span>
+      <button *ngIf="!task.completed" class="btn btn-primary"> Teminer</button> -->
+    </td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
